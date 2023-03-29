@@ -22,11 +22,17 @@ const SelectUser = ({ show, setShow }) => {
     // console.log(users)
     return (
      <div>
-        <form>
-            <select>
+        <form type="submit">
+            <label>Select Your Username to Login</label>
+            <div>
+                <select>
                 <option></option>
-                {users.map((user) => <option>{user.username}</option>)}
-            </select>
+                    {users.map((user) => <option key={user.id}>{user.username}</option>)}
+                </select>
+            </div>
+            <div>
+                <button>Login</button>
+            </div>
         </form>
      </div>
     )
