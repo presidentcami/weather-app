@@ -10,7 +10,7 @@ const WeatherInfo = ({ currentUser, setCurrentUser }) => {
     return (
         <div className="mybody">
         <div className="list-students">
-            <h2>Hello {firstname} {lastname} </h2>
+            <h2>Hello {firstname} {lastname}! </h2>
     
         </div>
         <button onClick={() => setCurrentUser(null)} >Logout</button>

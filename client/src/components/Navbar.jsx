@@ -4,7 +4,9 @@ import Nav from 'react-bootstrap/Nav';
 import Logo from '../assets/BlueTechtonicaWord.png'
 
 
-function MyNavBar(props) {
+function MyNavBar({ currentUser }) {
+
+
 
   return (
     <>
@@ -21,9 +23,7 @@ function MyNavBar(props) {
         <Nav.Link >Your Link</Nav.Link>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
-            Signed in as: <a href="#login">Cristina Rodriguez</a>
-          </Navbar.Text>
+        {currentUser ? <Navbar.Text>Signed in as: <a href="#login">{currentUser[0].firstname} {currentUser[0].lastname}</a> </Navbar.Text> : null} 
         </Navbar.Collapse>
       </Container>
     </Navbar>
