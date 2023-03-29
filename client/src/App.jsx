@@ -10,7 +10,7 @@ function App() {
 
 
   const [users, setUsers] = useState([])
-  const [ç, setCurrentUser] = useState(null)
+  const [currentUser, setCurrentUser] = useState(null)
 
   console.log(currentUser)
   return (

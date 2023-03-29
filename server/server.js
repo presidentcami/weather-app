@@ -26,6 +26,17 @@ app.get('/api/users', async (req, res) => {
     }
 })
 
+// get user by ID
+app.get('/api/oneuser/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { rows: user } = await db.query('SELECT * FROM weatherusers WHERE id=$1', [id]);
+        res.send(user)
+    } catch (err) {
+        console.error(err.message)
+    }
+})
+
 // create get request to weather api for data
 app.get('/weather', (req, res) => {
     const { cityName, stateCode, countryCode } = req.query;

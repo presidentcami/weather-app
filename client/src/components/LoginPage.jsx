@@ -22,15 +22,15 @@ const Login = ({ users, setUsers, setCurrentUser }) => {
         // console.log(users)
     }, []);
 
-    // const handleShow = () => {
-    //     setShow(!show)
-    //     // console.log(show)
-    // }
 
     const handleUserSelect = (e) => {
         e.preventDefault()
         // console.log(e)
-        setCurrentUser(selectedUser)
+        fetch(`http://localhost:8081/api/oneuser/${selectedUser}`)
+            .then((response) => response.json())
+            .then((user) => {
+                setCurrentUser(user);
+            });
     }
 
     // console.log(show)
