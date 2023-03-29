@@ -15,7 +15,7 @@ function App() {
   console.log(currentUser)
   return (
     <div className="App">
-      <MyNavBar currentUser={currentUser} />
+      <MyNavBar currentUser={currentUser} setCurrentUser={setCurrentUser} />
       {currentUser ?
         <WeatherInfo currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Login users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />}
       {/*<ListStudents /> */}

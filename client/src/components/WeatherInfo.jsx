@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import * as ioicons from 'react-icons/io5'
 import MyForm from './FindCityForm';
+import WeatherCard from './WeatherCard';
 
 
 const WeatherInfo = ({ currentUser, setCurrentUser }) => {
@@ -28,12 +29,13 @@ const WeatherInfo = ({ currentUser, setCurrentUser }) => {
     return (
         <div className="mybody">
         <div className="list-students">
-            <h2>Hello {firstname} {lastname}! </h2>
+            <h2>Hello {firstname} {lastname}! </h2><button onClick={() => setCurrentUser(null)}>Logout</button>
             <MyForm setCity={setCity} onSubmit={handleSubmit} />
         {favoritecity ? 'Weather Card' : null}
+        {result ? <WeatherCard data={result} /> : null}
         <p>Weather</p>
         </div>
-        <button onClick={() => setCurrentUser(null)}>Logout</button>
+        
         </div>
     );
 }
