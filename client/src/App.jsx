@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <MyNavBar />
       {currentUser ?
-        <WeatherInfo /> : <Login users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />}
+        <WeatherInfo currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Login users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />}
       {/*<ListStudents /> */}
 
     </div>
