@@ -26,6 +26,32 @@ app.get('/api/users', async (req, res) => {
     }
 })
 
+// create get request to weather api for data
+app.get('/weather', (req, res) => {
+    const { cityName, stateCode, countryCode } = req.query;
+    // console.log(req.query); -- ran some tests
+    const apiKey = process.env.API_KEY;
+    // console.log(apiKey) 
+    // console.log("city", req.query.cityName, "apiKey", apiKey)
+    const params = new URLSearchParams({
+        q: cityName, stateCode, countryCode,
+        appid: apiKey,
+        units: "imperial"
+    });
+    const url = `https://api.openweathermap.org/data/2.5/weather?${params}`;
+    console.log(url);
+
+    fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+            res.send(data); // had copied this fetch request and originally data was in {}, so deleted that to help my weathercard easily access the data
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+});
+
+
 
 // create the get request for students in the endpoint '/api/students'
 app.get('/api/students', async (req, res) => {
