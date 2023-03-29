@@ -39,13 +39,13 @@ app.get('/api/oneuser/:id', async (req, res) => {
 
 // create get request to weather api for data
 app.get('/weather', (req, res) => {
-    const { cityName, stateCode, countryCode } = req.query;
+    const { zip } = req.query;
     // console.log(req.query); -- ran some tests
     const apiKey = process.env.API_KEY;
     // console.log(apiKey) 
     // console.log("city", req.query.cityName, "apiKey", apiKey)
     const params = new URLSearchParams({
-        q: cityName, stateCode, countryCode,
+        q: zip,
         appid: apiKey,
         units: "imperial"
     });
