@@ -4,32 +4,47 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
 
-const SelectUser = ({ show, setShow, users, setUsers }) => {
+const Login = ({ users, setUsers, setCurrentUser }) => {
 
+    const [selectedUser, setSelectedUser] = useState(null)
     const loadUsers = () => {
         // A function to fetch the list of students that will be load anytime that list change
         fetch("http://localhost:8081/api/users")
             .then((response) => response.json())
             .then((users) => {
                 setUsers(users);
+                // console.log(users)
             });
     }
 
     useEffect(() => {
         loadUsers();
-    }, [users]);
+        // console.log(users)
+    }, []);
 
+    // const handleShow = () => {
+    //     setShow(!show)
+    //     // console.log(show)
+    // }
+
+    const handleUserSelect = (e) => {
+        e.preventDefault()
+        // console.log(e)
+        setCurrentUser(selectedUser)
+    }
+
+    // console.log(show)
     // console.log(users)
     // this whole return will probably be actually a component that goes into App.js, along with make new user form
     return (
         <>
      <div>
-        <form type="submit">
+        <form type="submit" onSubmit={handleUserSelect}>
             <label>Select Your Username to Login</label>
             <div>
-                <select>
+                <select onChange={(e) => setSelectedUser(e.target.value)} >
                 <option></option>
-                    {users.map((user) => <option key={user.id}>{user.username}</option>)}
+                    {users.map((user) => <option key={user.id} value={user.id} >{user.username}</option>)}
                 </select>
             </div>
             <div>
@@ -46,4 +61,4 @@ const SelectUser = ({ show, setShow, users, setUsers }) => {
 
 }
 
-export default SelectUser;
+export default Login;

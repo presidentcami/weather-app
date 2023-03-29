@@ -2,20 +2,23 @@ import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {useState} from 'react'
 import MyNavBar from './components/Navbar'
-import SelectUser from './components/Users';
+import Login from './components/LoginPage';
 import ListStudents from './components/ListStudents'
 
 
 function App() {
 
-  const [show, setShow] = useState(true)
-  const [users, setUsers] = useState([])
 
+  const [users, setUsers] = useState([])
+  const [ç, setCurrentUser] = useState(null)
+
+  console.log(currentUser)
   return (
     <div className="App">
       <MyNavBar />
-      <SelectUser setShow={setShow} show={show} users={users} setUsers={setUsers} />
-      {/* <ListStudents /> */}
+      {currentUser ?
+        <button onClick={() => setShow(true)}>Logout</button> : <Login users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />}
+      {/*<ListStudents /> */}
 
     </div>
   )
