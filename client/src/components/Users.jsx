@@ -20,6 +20,7 @@ const SelectUser = ({ show, setShow }) => {
     }, [users]);
 
     // console.log(users)
+    // this whole return will probably be actually a component that goes into App.js, along with make new user form
     return (
      <div>
         <form type="submit">
