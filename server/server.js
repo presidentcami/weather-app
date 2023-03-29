@@ -9,6 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 8081;
 app.use(cors());
 app.use(express.json());
+// console.log(process.env.API_KEY)
 
 // creates an endpoint for the route "/""
 app.get('/', (req, res) => {
