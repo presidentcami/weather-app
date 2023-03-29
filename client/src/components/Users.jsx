@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import AddUserForm from './AddUserForm';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
@@ -22,6 +23,7 @@ const SelectUser = ({ show, setShow }) => {
     // console.log(users)
     // this whole return will probably be actually a component that goes into App.js, along with make new user form
     return (
+        <>
      <div>
         <form type="submit">
             <label>Select Your Username to Login</label>
@@ -32,10 +34,15 @@ const SelectUser = ({ show, setShow }) => {
                 </select>
             </div>
             <div>
-                <button>Login</button>
+            <Button type="submit" variant="outline-success" style={{ padding: '0.6em', marginTop: '0.9em' }}>Login</Button>
             </div>
         </form>
      </div>
+     
+     <div>
+        <AddUserForm setUsers={setUsers} />
+     </div>
+     </>
     )
 
 }
