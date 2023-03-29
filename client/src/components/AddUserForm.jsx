@@ -50,7 +50,7 @@ const AddUserForm = ({ setUsers }) => {
                 .then(user => {
                     setUsers(user);
                     console.log('users fetched when new user is added', user);
-
+                    
                 })
             // console.log(state)
             // window.location = "/"; 

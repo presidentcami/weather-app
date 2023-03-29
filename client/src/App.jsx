@@ -9,11 +9,12 @@ import ListStudents from './components/ListStudents'
 function App() {
 
   const [show, setShow] = useState(true)
+  const [users, setUsers] = useState([])
 
   return (
     <div className="App">
       <MyNavBar />
-      <SelectUser setShow={setShow} show={show} />
+      <SelectUser setShow={setShow} show={show} users={users} setUsers={setUsers} />
       {/* <ListStudents /> */}
 
     </div>

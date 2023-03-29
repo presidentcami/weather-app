@@ -4,9 +4,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
 
-const SelectUser = ({ show, setShow }) => {
+const SelectUser = ({ show, setShow, users, setUsers }) => {
 
-    const [users, setUsers] = useState([])
     const loadUsers = () => {
         // A function to fetch the list of students that will be load anytime that list change
         fetch("http://localhost:8081/api/users")
