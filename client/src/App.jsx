@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {useState} from 'react'
 import MyNavBar from './components/Navbar'
 import Login from './components/LoginPage';
-import ListStudents from './components/ListStudents'
+import WeatherInfo from './components/WeatherInfo'
 
 
 function App() {
@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <MyNavBar />
       {currentUser ?
-        <button onClick={() => setShow(true)}>Logout</button> : <Login users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />}
+        <WeatherInfo /> : <Login users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />}
       {/*<ListStudents /> */}
 
     </div>
