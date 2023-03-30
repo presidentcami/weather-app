@@ -62,6 +62,20 @@ app.get('/weather', (req, res) => {
         });
 });
 
+// update the favoritecity column - make a city a favorite using zip code
+app.put("/api/users/favoritecity/:id", async (req, res) => {
+    try {
+        const {id} = req.params;
+        let {favoritecity} = req.body;
+        // console.log("id", id, "favorite", favorite, req.body)
+        const updateFavorite = await db.query("UPDATE weatherusers SET favoritecity = $1 WHERE id = $2", [favoritecity, id]);
+        // console.log("update favorite", updateFavorite)
+
+        res.json({ message: "Favorite is updated", newFaveValue: favoritecity });
+    } catch (error) {
+        console.error(error.message)
+    }
+})
 
 
 // create the get request for students in the endpoint '/api/students'

@@ -10,19 +10,15 @@ const MyForm = ({ setCity, onSubmit }) => {
     //create functions that handle the event of the user typing into the form
     const handleNameChange = (event) => {
         const zipCode = `${event.target.value},us`;
-        setCity(() => (zipCode));
+        setCity(zipCode);
         console.log(zipCode)
     };
 
-    // const handleLastnameChange = (event) => {
-    //     const lastname = event.target.value;
-    //     setStudent((student) => ({ ...student, lastname }));
-    // };
 
 
-    const clearForm = () => {
-        setCity(null)
-    }
+    // const clearForm = () => {
+    //     setCity(null)
+    // }
 
     //A function to handle the post request
     // const postStudent = (newStudent) => {
@@ -65,7 +61,6 @@ const MyForm = ({ setCity, onSubmit }) => {
     const handleSubmit = (e) => {
         e.preventDefault();
         onSubmit();
-        clearForm()
     };
 
     return (
@@ -81,17 +76,6 @@ const MyForm = ({ setCity, onSubmit }) => {
                     onChange={handleNameChange}
                 />
             </Form.Group>
-            {/* <Form.Group>
-                <Form.Label>Country</Form.Label>
-                <input
-                    type="text"
-                    id="add-user-lastname"
-                    placeholder="Last Name"
-                    required
-                    value={student.lastname}
-                    onChange={handleLastnameChange}
-                />
-            </Form.Group> */}
             <Form.Group>
             <Button type="submit" variant="outline-success">Search</Button>
             </Form.Group>

@@ -3,10 +3,10 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
 
-const WeatherCard = ({ data, city, currentUser, faveCity, setFaveCity }) => {
+const FaveCity = ({ data, currentUser, faveCity }) => {
 
-    const [{ id, favoritecity }] = currentUser
-    console.log(city, "inside the weather card", favoritecity)
+// need a fetch request to API for whatever the faveCity is
+
     let sunrise = data.sys.sunrise;
     let sunset = data.sys.sunset;
 
@@ -16,29 +16,6 @@ const WeatherCard = ({ data, city, currentUser, faveCity, setFaveCity }) => {
     let set = new Date(sunset * 1000)
     let sunset2 = set.toLocaleTimeString();
 
-    // need an event handler for when they click on the favorite button that makes a put request to update the 
-    // favoritecity column to be the city we are in - do i even need a setFaveCity state? think about that for a bit
-
-const putRequest = async () => {
-    console.log(id)
-    const response = await fetch(`http://localhost:8081/api/users/favoritecity/${id}`, {
-        method: "PUT",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ favoritecity: faveCity }),
-    })
-    const responseObj = await response.json();
-    console.log("put request content", responseObj)
-    return responseObj;
-}
-    const handleSetFavorite = () => {
-        setFaveCity(city);
-        putRequest();
-        // console.log(currentUser)
-    }
-
     return (
         <div className="weather-card">
             <div className="result">
@@ -46,7 +23,6 @@ const putRequest = async () => {
                     {data.name}, {data.sys.country}
                 </span>
                 </p>
-                <button onClick={handleSetFavorite} >save as fave</button>
                 <p>Description: <span className="data">
                 {data.weather[0].description}
               </span>
@@ -81,9 +57,18 @@ const putRequest = async () => {
             {sunset2} </span>
           </p>
             </div>
+
+        
+        {/* <Card>
+            <Card.Body>
+            <Card.Title>{student.firstname} {student.lastname}</Card.Title>
+            <Button variant="outline-danger" onClick={()=>{onDelete(student)}} style={{padding: '0.6em', marginRight:'0.9em'}}><ioicons.IoTrash/></Button>
+            <Button variant="outline-info" onClick={()=>{onUpdate(student)}} style={{padding: '0.6em'}}> <ioicons.IoSync/></Button>
+            </Card.Body>
+        </Card>     */}
     </div>
     )
 
 }
 
-export default WeatherCard;
+export default FaveCity;
