@@ -31,9 +31,8 @@ const WeatherInfo = ({ currentUser, setCurrentUser }) => {
         <div className="mybody">
         <div className="list-students">
             <h2>Hello {firstname} {lastname}! </h2><button onClick={() => setCurrentUser(null)}>Logout</button>
-            {faveCity && <FaveCity currentUser={currentUser} faveCity={faveCity} favoritecity={favoritecity} />}
+            {faveCity && <FaveCity currentUser={currentUser} faveCity={faveCity} setFaveCity={setFaveCity} favoritecity={favoritecity} />}
                 <MyForm setSearchBarString={setSearchBarString} onSubmit={handleSubmit} />
-        <p>Set this city to be your favorite!</p>
                 {result ? <WeatherCard data={result} currentUser={currentUser} searchBarString={searchBarString} favoritecity={favoritecity} setResult={setResult} faveCity={faveCity} setFaveCity={setFaveCity} /> : null}
         
         </div>

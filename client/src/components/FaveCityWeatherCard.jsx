@@ -3,8 +3,8 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
 
-const FaveCity = ({ currentUser, faveCity, favoritecity }) => {
-  // const [data, setData] = useState(null)
+const FaveCity = ({ currentUser, favoritecity }) => {
+  const [faveCity, setFaveCity] = useState('')
   console.log(favoritecity, faveCity)
 
 
@@ -12,19 +12,18 @@ const FaveCity = ({ currentUser, faveCity, favoritecity }) => {
 
 
 
-  // useEffect(() => {
-  //   loadFaveCity();  const loadFaveCity = () => {
+  useEffect(() => {
     
-  //   fetch(`http://localhost:8081/weather?zip=${faveCity}`)
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       console.log(result)
-  //       setData(result);
-  //     });
+    fetch(`http://localhost:8081/weather?zip=${favoritecity}`)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result)
+        setFaveCity(result);
+        console.log("tell me this is faveCity data", faveCity)
+      });
       
-  // }
-  //   console.log("please tell me this is data", data)
-  // }, []);
+    
+  }, []);
 
 const sunrise = useMemo(() => {
   if (!faveCity?.sys?.sunrise) return null;
@@ -38,7 +37,7 @@ const sunrise = useMemo(() => {
     return sunsetDate.toLocaleTimeString();
   }, [faveCity])
 
-    return  faveCity &&( 
+    return faveCity && (
         <div className="weather-card">
             <div className="result">
                 <p>City: <span className="faveCity">
