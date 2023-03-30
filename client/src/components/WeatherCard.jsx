@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
 
-const WeatherCard = ({ data, searchBarString, setResult, currentUser, faveCity, setFaveCity }) => {
+const WeatherCard = ({ data, searchBarString, setResult, currentUser, faveCity, setFaveCity, favoritecity }) => {
 
     const [{ id }] = currentUser
     console.log(searchBarString, "inside the weather card")
@@ -19,8 +19,10 @@ const WeatherCard = ({ data, searchBarString, setResult, currentUser, faveCity, 
     // need an event handler for when they click on the favorite button that makes a put request to update the 
     // favoritecity column to be the city we are in - do i even need a setFaveCity state? think about that for a bit
     const handleSetFavorite = async (theFaveCity) => {
-        setFaveCity(searchBarString);
-        setResult(null)
+        setFaveCity(data);
+        setResult(null)        
+        console.log("faveCity the object", faveCity, "favoritecity the database", favoritecity)
+
         // putRequest(faveCity);
         const response = await fetch(`http://localhost:8081/api/users/favoritecity/${id}`, {
             method: "PUT",
@@ -33,7 +35,6 @@ const WeatherCard = ({ data, searchBarString, setResult, currentUser, faveCity, 
         const responseObj = await response.json();
         console.log("put request content", responseObj)
         return responseObj;
-        // console.log(faveCity)
     }
 
 
