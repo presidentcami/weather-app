@@ -1,22 +1,42 @@
-import React from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
 
-const FaveCity = ({ data, currentUser, faveCity }) => {
+const FaveCity = ({ currentUser, faveCity }) => {
+  const [data, setData] = useState(null)
 
 // need a fetch request to API for whatever the faveCity is
 
-    let sunrise = data.sys.sunrise;
-    let sunset = data.sys.sunset;
+  const loadFaveCity = () => {
+    
+    fetch(`http://localhost:8081/weather?zip=${faveCity}`)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result)
+        setData(result);
+      });
+      
+  }
 
-    let rise = new Date(sunrise * 1000);
-    let sunrise1 = rise.toLocaleTimeString();
+  useEffect(() => {
+    loadFaveCity();
+    console.log("please tell me this is data", data)
+  }, []);
 
-    let set = new Date(sunset * 1000)
-    let sunset2 = set.toLocaleTimeString();
+const sunrise = useMemo(() => {
+  if (!data?.sys?.sunrise) return null;
+  let riseDate = new Date(data.sys.sunrise * 1000);
+  return riseDate.toLocaleTimeString();
+}, [data])
 
-    return (
+  const sunset = useMemo(() => {
+    if (!data?.sys?.sunset) return null;
+    let sunsetDate = new Date(data.sys.sunset * 1000);
+    return sunsetDate.toLocaleTimeString();
+  }, [data])
+
+    return  data && (
         <div className="weather-card">
             <div className="result">
                 <p>City: <span className="data">
@@ -50,23 +70,14 @@ const FaveCity = ({ data, currentUser, faveCity }) => {
           </p>
           <p>
             Sunrise: <span className="data">
-              {sunrise1}</span> 
+              {sunrise}</span> 
           </p>
           <p>
             Sunset <span className="data">
-            {sunset2} </span>
+            {sunset} </span>
           </p>
-            </div>
-
-        
-        {/* <Card>
-            <Card.Body>
-            <Card.Title>{student.firstname} {student.lastname}</Card.Title>
-            <Button variant="outline-danger" onClick={()=>{onDelete(student)}} style={{padding: '0.6em', marginRight:'0.9em'}}><ioicons.IoTrash/></Button>
-            <Button variant="outline-info" onClick={()=>{onUpdate(student)}} style={{padding: '0.6em'}}> <ioicons.IoSync/></Button>
-            </Card.Body>
-        </Card>     */}
-    </div>
+            </div>     
+   </div>
     )
 
 }

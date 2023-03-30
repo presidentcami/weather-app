@@ -33,6 +33,9 @@ const putRequest = async () => {
     console.log("put request content", responseObj)
     return responseObj;
 }
+
+// load fave city after it's set?
+
     const handleSetFavorite = () => {
         setFaveCity(city);
         putRequest();
@@ -46,7 +49,7 @@ const putRequest = async () => {
                     {data.name}, {data.sys.country}
                 </span>
                 </p>
-                <button onClick={handleSetFavorite} >save as fave</button>
+                <button onClick={handleSetFavorite}>save as fave</button>
                 <p>Description: <span className="data">
                 {data.weather[0].description}
               </span>

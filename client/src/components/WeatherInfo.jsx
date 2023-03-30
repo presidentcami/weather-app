@@ -12,7 +12,6 @@ const WeatherInfo = ({ currentUser, setCurrentUser }) => {
     const [result, setResult] = useState(null);
     const [faveCity, setFaveCity] = useState(favoritecity)
 
-    // http://localhost:8081/weather?cityName=`{cityName}`&stateCode=`{stateCode}`&countryCode=`{countryCode}`
 
     const loadCity = () => {
         console.log(city)
