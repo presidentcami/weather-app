@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Button, Form } from "react-bootstrap"
 
 
-const MyForm = ({ setCity, onSubmit }) => {
+const MyForm = ({ setSearchBarString, onSubmit }) => {
 
     // This is the original State with not initial student 
 
@@ -10,52 +10,9 @@ const MyForm = ({ setCity, onSubmit }) => {
     //create functions that handle the event of the user typing into the form
     const handleNameChange = (event) => {
         const zipCode = `${event.target.value},us`;
-        setCity(zipCode);
+        setSearchBarString(zipCode);
         console.log(zipCode)
     };
-
-
-
-    // const clearForm = () => {
-    //     setCity(null)
-    // }
-
-    //A function to handle the post request
-    // const postStudent = (newStudent) => {
-    //     return fetch("http://localhost:8081/api/students", {
-    //         method: "POST",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify(newStudent),
-    //     })
-    //         .then((response) => {
-    //             return response.json();
-    //         })
-    //         .then((data) => {
-    //             //console.log("From the post ", data);
-    //             //I'm sending data to the List of Students (the parent) for updating the list
-    //             onSaveStudent(data);
-    //             //this line just for cleaning the form
-    //             clearForm();
-    //         });
-    // };
-
-    // //A function to handle the post request
-    // const putStudent = (toEditStudent) => {
-    //     return fetch(`http://localhost:8081/api/students/${toEditStudent.id}`, {
-    //         method: "PUT",
-    //         headers: { "Content-Type": "application/json" },
-    //         body: JSON.stringify(toEditStudent),
-    //     })
-    //         .then((response) => {
-    //             return response.json();
-    //         })
-    //         .then((data) => {
-    //             onUpdateStudent(data);
-    //             //this line just for cleaning the form
-    //             clearForm();
-    //         });
-    // };
-
 
     //A function to handle the submit in both cases - Post and Put request!
     const handleSubmit = (e) => {

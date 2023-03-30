@@ -3,10 +3,10 @@ import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
 
-const WeatherCard = ({ data, city, currentUser, faveCity, setFaveCity }) => {
+const WeatherCard = ({ data, searchBarString, setResult, currentUser, faveCity, setFaveCity }) => {
 
-    const [{ id, favoritecity }] = currentUser
-    console.log(city, "inside the weather card", favoritecity)
+    const [{ id }] = currentUser
+    console.log(searchBarString, "inside the weather card")
     let sunrise = data.sys.sunrise;
     let sunset = data.sys.sunset;
 
@@ -18,29 +18,28 @@ const WeatherCard = ({ data, city, currentUser, faveCity, setFaveCity }) => {
 
     // need an event handler for when they click on the favorite button that makes a put request to update the 
     // favoritecity column to be the city we are in - do i even need a setFaveCity state? think about that for a bit
+    const handleSetFavorite = async (theFaveCity) => {
+        setFaveCity(searchBarString);
+        setResult(null)
+        // putRequest(faveCity);
+        const response = await fetch(`http://localhost:8081/api/users/favoritecity/${id}`, {
+            method: "PUT",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ favoritecity: theFaveCity }),
+        })
+        const responseObj = await response.json();
+        console.log("put request content", responseObj)
+        return responseObj;
+        // console.log(faveCity)
+    }
 
-const putRequest = async () => {
-    console.log(id)
-    const response = await fetch(`http://localhost:8081/api/users/favoritecity/${id}`, {
-        method: "PUT",
-        headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ favoritecity: faveCity }),
-    })
-    const responseObj = await response.json();
-    console.log("put request content", responseObj)
-    return responseObj;
-}
 
 // load fave city after it's set?
 
-    const handleSetFavorite = () => {
-        setFaveCity(city);
-        putRequest();
-        // console.log(currentUser)
-    }
+
 
     return (
         <div className="weather-card">
@@ -49,7 +48,7 @@ const putRequest = async () => {
                     {data.name}, {data.sys.country}
                 </span>
                 </p>
-                <button onClick={handleSetFavorite}>save as fave</button>
+                <button onClick={() => handleSetFavorite(searchBarString)}>save as fave</button>
                 <p>Description: <span className="data">
                 {data.weather[0].description}
               </span>

@@ -67,7 +67,7 @@ app.put("/api/users/favoritecity/:id", async (req, res) => {
     try {
         const {id} = req.params;
         let {favoritecity} = req.body;
-        // console.log("id", id, "favorite", favorite, req.body)
+        console.log("id", id, "favorite", favoritecity, req.body)
         const updateFavorite = await db.query("UPDATE weatherusers SET favoritecity = $1 WHERE id = $2", [favoritecity, id]);
         // console.log("update favorite", updateFavorite)
 
