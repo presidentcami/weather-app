@@ -4,16 +4,34 @@ import Button from 'react-bootstrap/Button';
 import * as ioicons from 'react-icons/io5'
 
 const FaveCity = ({ currentUser, favoritecity }) => {
+  const [{ id }] = currentUser
   const [faveCity, setFaveCity] = useState('')
-  console.log(favoritecity, faveCity)
+  console.log(favoritecity, faveCity, id)
 
+// tried to add a setter to unfavorite the city
+  // const handleUnFavorite = async () => {
+  //   // deleteFaveCity(null);
+  //   // setResult(null)
+  //   // console.log("faveCity the object", faveCity, "favoritecity the database", favoritecity)
 
-// need a fetch request to API for whatever the faveCity is
+  //   // putRequest(faveCity);
+  //   const response = await fetch(`http://localhost:8081/api/users/favoritecity/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json"
+  //     },
+  //     body: JSON.stringify({ favoritecity: null }),
+  //   })
+  //   const responseObj = await response.json();
+  //   console.log("put request content", responseObj)
+  //   return responseObj;
+  // }
 
-
-
+// need a fetch request to API for whatever the faveCity is upon login
   useEffect(() => {
     
+
     fetch(`http://localhost:8081/weather?zip=${favoritecity}`)
       .then((response) => response.json())
       .then((result) => {
@@ -44,6 +62,8 @@ const sunrise = useMemo(() => {
                     {faveCity.name}, {faveCity.sys.country}
                 </span>
                 </p>
+                {/* onClick={handleUnFavorite} */}
+          <button>remove from favorites</button>
                 <p>Description: <span className="faveCity">
                 {faveCity.weather[0].description}
               </span>

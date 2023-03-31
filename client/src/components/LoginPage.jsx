@@ -33,6 +33,11 @@ const Login = ({ users, setUsers, setCurrentUser }) => {
             });
     }
 
+    users.sort(function (a, b) {
+        var textA = a.username.toUpperCase();
+        var textB = b.username.toUpperCase();
+        return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    });
     // console.log(show)
     // console.log(users)
     // this whole return will probably be actually a component that goes into App.js, along with make new user form

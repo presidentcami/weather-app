@@ -18,7 +18,7 @@ const WeatherCard = ({ data, searchBarString, setResult, currentUser, faveCity, 
 
     // need an event handler for when they click on the favorite button that makes a put request to update the 
     // favoritecity column to be the city we are in - do i even need a setFaveCity state? think about that for a bit
-    const handleSetFavorite = async (theFaveCity) => {
+    const handleSetFavorite = async () => {
         setFaveCity(data);
         setResult(null)        
         console.log("faveCity the object", faveCity, "favoritecity the database", favoritecity)
@@ -30,7 +30,8 @@ const WeatherCard = ({ data, searchBarString, setResult, currentUser, faveCity, 
                 Accept: "application/json",
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({ favoritecity: theFaveCity }),
+          body: JSON.stringify({ favoritecity: searchBarString }),
+          // this is being sent back to the backend but for some reason not being put in the query
         })
         const responseObj = await response.json();
         console.log("put request content", responseObj)
@@ -49,7 +50,7 @@ const WeatherCard = ({ data, searchBarString, setResult, currentUser, faveCity, 
                     {data.name}, {data.sys.country}
                 </span>
                 </p>
-                <button onClick={() => handleSetFavorite(searchBarString)}>save as fave</button>
+                <button onClick={handleSetFavorite}>save as fave</button>
                 <p>Description: <span className="data">
                 {data.weather[0].description}
               </span>

@@ -14,6 +14,8 @@ const reducer = (state, action) => {
                 ...state,
                 [action.payload.key]: action.payload.value,
             };
+        case 'reset': 
+            return { ...initialValue } 
         default:
             throw new Error(`Unknown action type: ${action.type}`);
     }
@@ -52,6 +54,7 @@ const AddUserForm = ({ setUsers }) => {
                     console.log('users fetched when new user is added', user);
                     
                 })
+                dispatch ({ type: 'reset', initialValue })
             // console.log(state)
             // window.location = "/"; 
         } catch (error) {
@@ -66,28 +69,28 @@ const AddUserForm = ({ setUsers }) => {
             <label>First Name</label>
             <input
                 type="text"
-                id="add-user-name"
+                id="add-first-name"
                 name="firstname"
                 required
-                // value={contact.first_name}
+                value={state.firstname}
                 onChange={inputAction}
             />
             <label>Last Name</label>
             <input
                 type="text"
-                id="add-user-name"
+                id="add-last-name"
                 name="lastname"
                 required
-                // value={contact.last_name}
+                value={state.lastname}
                 onChange={inputAction}
             />
             <label>Username</label>
             <input
                 type="text"
-                id="add-user-name"
+                id="add-username"
                 name="username"
                 required
-                // value={contact.phone}
+                value={state.username}
                 onChange={inputAction}
             />
             <div>
