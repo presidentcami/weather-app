@@ -1,15 +1,24 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {useState} from 'react'
 import MyNavBar from './components/Navbar'
-import ListStudents from './components/ListStudents'
+import Login from './components/LoginPage';
+import WeatherInfo from './components/WeatherInfo'
 
 
 function App() {
 
+
+  const [users, setUsers] = useState([])
+  const [currentUser, setCurrentUser] = useState(null)
+
+  // console.log(currentUser)
   return (
     <div className="App">
-      <MyNavBar />
-      <ListStudents />
+      <MyNavBar currentUser={currentUser} setCurrentUser={setCurrentUser} />
+      {currentUser ?
+        <WeatherInfo currentUser={currentUser} setCurrentUser={setCurrentUser} /> : <Login users={users} setUsers={setUsers} setCurrentUser={setCurrentUser} />}
+      {/*<ListStudents /> */}
 
     </div>
   )
