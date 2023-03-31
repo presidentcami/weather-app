@@ -10,9 +10,9 @@ const WeatherInfo = ({ currentUser, setCurrentUser }) => {
     const [{ firstname, lastname, favoritecity }] = currentUser;
     const [searchBarString, setSearchBarString] = useState('');
     const [result, setResult] = useState(null);
-    const [faveCity, setFaveCity] = useState(favoritecity)
+    const [faveCity, setFaveCity] = useState(null);
 
-
+    console.log("current user", currentUser, "favorite city ", faveCity)
     const loadCity = () => {
         console.log(searchBarString)
         fetch(`http://localhost:8081/weather?zip=${searchBarString}`)
@@ -26,12 +26,23 @@ const WeatherInfo = ({ currentUser, setCurrentUser }) => {
     const handleSubmit = (e) => {
         loadCity()
     }
+    useEffect(() => {
+    if (!favoritecity) return;
+    fetch(`http://localhost:8081/weather?zip=${favoritecity}`)
+        .then((response) => response.json())
+        .then((result) => {
+            console.log(result)
+            setFaveCity(result);
+            console.log("tell me this is faveCity data", faveCity)
+        });
+    }, [favoritecity]);
+
 
     return (
         <div className="mybody">
         <div className="list-students">
             <h2>Hello {firstname} {lastname}! </h2><button onClick={() => setCurrentUser(null)}>Logout</button>
-            {faveCity && <FaveCity currentUser={currentUser} faveCity={faveCity} favoritecity={favoritecity} />}
+            {faveCity && <FaveCity currentUser={currentUser} faveCity={faveCity} setFaveCity={setFaveCity} />}
                 <MyForm setSearchBarString={setSearchBarString} onSubmit={handleSubmit} />
                 {result && <WeatherCard data={result} currentUser={currentUser} searchBarString={searchBarString} favoritecity={favoritecity} setResult={setResult} faveCity={faveCity} setFaveCity={setFaveCity} />}
         
